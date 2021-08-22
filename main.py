@@ -122,10 +122,10 @@ if __name__ == '__main__':
                 column = None
                 if orgId == None:
                     print('\t'+departmentName+' '+str(orgId)+' => None')
-#                     time.sleep(2)
+                    time.sleep(1)
                 elif len(items)<1:
                     print('\t'+departmentName+' '+str(orgId)+' => None')
-#                     time.sleep(1)
+                    time.sleep(1)
                 else:
                     print('\t'+departmentName+' '+str(orgId)+' => '+str(len(items)))
                     
