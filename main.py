@@ -117,15 +117,15 @@ if __name__ == '__main__':
                 departmentName = itemColumn[1].string
                 postData = createPostData(orgId, StartTime, EndTime)
                 buy = requests.post(buyPostPath, data=postData)
+                time.sleep(2) # 
+
                 buySoup = BeautifulSoup(buy.text, "html.parser")
                 items = buySoup.find_all("tr", onmouseover="overcss(this);")
                 column = None
                 if orgId == None:
                     print('\t'+departmentName+' '+str(orgId)+' => None')
-                    time.sleep(1)
                 elif len(items)<1:
                     print('\t'+departmentName+' '+str(orgId)+' => None')
-                    time.sleep(1)
                 else:
                     print('\t'+departmentName+' '+str(orgId)+' => '+str(len(items)))
                     
@@ -147,7 +147,6 @@ if __name__ == '__main__':
                         if not isPass:
                             for i, name in enumerate(columnName):
                                 outputColumn[chineseColumnName[name]].append(infs[i])
-                        time.sleep(1)
     df = pandas.DataFrame(outputColumn)
     df.to_excel("國家機關採購案.xlsx",index=False, encoding='utf_8_sig')               
                         
