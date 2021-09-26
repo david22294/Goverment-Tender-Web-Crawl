@@ -81,15 +81,20 @@ def getException():
 basePath = "https://web.pcc.gov.tw/tps/main/pss/pblm/tender/basic/search/"
 buyPostPath = "https://web.pcc.gov.tw/tps/pss/tender.do?searchMode=common&searchType=basic"
 
-currentTime = datetime.datetime.now()
-weekAgoTime = currentTime - datetime.timedelta(days = 6)
-StartTime = "{Y}/{M}/{D}".format(Y=weekAgoTime.year-1911, M=weekAgoTime.month, D=weekAgoTime.day)
-StartTime = "{Y}/{MD}".format(Y=weekAgoTime.year-1911, MD=weekAgoTime.strftime("%m/%d"))
-EndTime = "{Y}/{MD}".format(Y=currentTime.year-1911, MD=currentTime.strftime("%m/%d"))
-
 if __name__ == '__main__':
     
+    dayRange = input("How long do you want to colloect?(day) ")
+    
     exceptionList = getException()
+    
+    currentTime = datetime.datetime.now()
+    weekAgoTime = currentTime - datetime.timedelta(days = int(dayRange))
+    StartTime = "{Y}/{M}/{D}".format(Y=weekAgoTime.year-1911, M=weekAgoTime.month, D=weekAgoTime.day)
+    StartTime = "{Y}/{MD}".format(Y=weekAgoTime.year-1911, MD=weekAgoTime.strftime("%m/%d"))
+    EndTime = "{Y}/{MD}".format(Y=currentTime.year-1911, MD=currentTime.strftime("%m/%d"))
+    
+    print("Start Time: "+StartTime)
+    print("End Time: "+EndTime)
     
     root = requests.get("https://web.pcc.gov.tw/tps/main/pss/pblm/tender/basic/search/mainListCommon.jsp?searchType=basic")
     rootContent = root.content.decode()
